@@ -155,9 +155,6 @@ def linrange(start=0, stop=None, step=1, **options):
     stop: last value
     step: space between values
 
-    Also accepts the same keyword arguments as np.linspace.  See
-    https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html
-
     returns: array or Quantity
     """
     if stop is None:
@@ -177,7 +174,10 @@ def linrange(start=0, stop=None, step=1, **options):
     if options['endpoint']:
         n += 1
 
-    array = np.linspace(start, stop, int(n), **options)
+    array = np.full(int(n), magnitude(step))
+    array[0] = magnitude(start)
+    array = np.cumsum(array)
+
     if units:
         array = array * units
     return array
