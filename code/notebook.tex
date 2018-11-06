@@ -1,0 +1,870 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Project2-v3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{project-2-team-11}{%
+\section{PROJECT 2 : TEAM 11}\label{project-2-team-11}}
+
+    Members: Talia Tandler, SeungU Lyu
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+         \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+         
+         \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+         \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    http://www.worldometers.info/world-population/us-population/ US pop in
+2017 = 324,459,463
+
+https://wwwnc.cdc.gov/travel/yellowbook/2018/infectious-diseases-related-to-travel/measles-rubeola
+Measles incubation period 11 days average, infectious period 2-4 days
+before rash to after rash.
+
+https://www.cdc.gov/vaccines/imz-managers/coverage/childvaxview/data-reports/mmr/trend/index.html
+MMR immunization rate in 2017 = 90.7\%
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{pop} \PY{o}{=} \PY{l+m+mi}{999}  \PY{c+c1}{\PYZsh{}population}
+         \PY{n}{init\PYZus{}im} \PY{o}{=} \PY{l+m+mf}{0.907}    \PY{c+c1}{\PYZsh{}initial immunity of the US population}
+         \PY{n}{beta} \PY{o}{=} \PY{l+m+mf}{0.9}        \PY{c+c1}{\PYZsh{}assumed contact rate}
+         \PY{n}{gamma} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{7}      \PY{c+c1}{\PYZsh{}US recovery rate from measles}
+         \PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{0.091}\PY{p}{;}     \PY{c+c1}{\PYZsh{}US rate from exposure period of 11 days to infected}
+\end{Verbatim}
+
+
+    \hypertarget{question}{%
+\subsection{Question}\label{question}}
+
+\hypertarget{what-is-the-result-of-lowering-the-measles-immunity-rate-in-a-small-community-during-a-outbreak}{%
+\subsubsection{What is the result of lowering the measles immunity rate
+in a small community during a
+outbreak?}\label{what-is-the-result-of-lowering-the-measles-immunity-rate-in-a-small-community-during-a-outbreak}}
+
+Measles is a highly infectious disease that can infect about 90\% of
+people that come into contact with the patient. However, the disease is
+not common these days because of the MMR vaccination, which can
+effectively prevent people getting the disease. Due to the high
+vaccination rate, the United States was declared free of circulating
+measles in 2000. However there were 911 cases of measles between 2001
+and 2011. These occurences arose due to individuals from other countries
+entering the U.S. with measles. Because of the disease's high infectious
+rate upon contact, herd immunity is considered very important for
+measles.
+
+In 2015, a measles outbreak occured at Disney World causing more than
+159 people to be infected during a single outbreak. Only
+50\textasciitilde{}86\% people exposed to this outbreak were vaccinated,
+causing an even bigger outbreak. This vaccination was lower than it
+should have been due to Anti-Vaccination Movements in the U.S. These
+lower rates lowered the population immunity rate and caused the herd
+immunity to not function as expected. The starter of this movement,
+Andrew Wakefield, stated that the MMR vaccination can cause autism in
+newborn children because of the mercury content inside the specific
+vaccine. Due to this false research, many parents became concerned with
+the side effects of the vaccination and opted to not vaccinate their
+children with MMR. As a result, there was a decently sized generation of
+children susceptible to measles because they did not receive the
+vaccination at birth.
+
+This simulation utilizes an SEIR model to understand how varying the
+measles immunity rate in a community effects herd immunity.
+
+\hypertarget{methodology}{%
+\subsection{Methodology}\label{methodology}}
+
+In order to create this model, we:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Did background research on the MMR vaccination and the measles
+  diseases and found a set of constants we would implement in our model.
+\item
+  Put the variables into a state function.
+\item
+  Set the total population to 1000, with initial infection number as one
+  person infected with measles.
+\item
+  Ran the simulation based on the number measles infections every day.
+\item
+  Set a condition where the measles outbreak ends when the number
+  infected people is less than one person.
+\item
+  Created graphs to visually represent our results.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}system} \PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{init\PYZus{}im}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Make a system object for the SCIR model}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    pop: Total US population}
+         \PY{l+s+sd}{    init\PYZus{}im: Initial Population Immunity}
+         \PY{l+s+sd}{    beta: effective contact number for patient}
+         \PY{l+s+sd}{    gamma: recovery rate for infected people}
+         \PY{l+s+sd}{    sigma: rate of incubation group moving to infectious group}
+         \PY{l+s+sd}{    return: System object\PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{init} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{S} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{pop}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{init\PYZus{}im}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{E} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{I} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{R} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{pop}\PY{o}{*}\PY{n}{init\PYZus{}im}\PY{p}{)}\PY{p}{)}
+             \PY{n}{init} \PY{o}{/}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{init}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}S: susceptible, E: exposed period, I: infected, R: recovered(immune to disease)}
+             
+             \PY{n}{t0} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{l+m+mi}{365} \PY{c+c1}{\PYZsh{}number of days in 1 year}
+             
+             \PY{k}{return} \PY{n}{System}\PY{p}{(}\PY{n}{init} \PY{o}{=} \PY{n}{init}\PY{p}{,}
+                           \PY{n}{beta} \PY{o}{=} \PY{n}{beta}\PY{p}{,}
+                           \PY{n}{gamma} \PY{o}{=} \PY{n}{gamma}\PY{p}{,}
+                           \PY{n}{sigma} \PY{o}{=} \PY{n}{sigma}\PY{p}{,}
+                           \PY{n}{t0} \PY{o}{=} \PY{n}{t0}\PY{p}{,}
+                           \PY{n}{t\PYZus{}end} \PY{o}{=} \PY{n}{t\PYZus{}end}\PY{p}{,}
+                           \PY{n}{init\PYZus{}im} \PY{o}{=} \PY{n}{init\PYZus{}im}\PY{p}{)}
+\end{Verbatim}
+
+
+    make\_system function sets the initial values for the state and returns
+it with other necessary variables. Since the model is a SEIR model,
+initial state init contains four values, S, E, I, R where S and R is
+determined by the initial size and immunization rate of the community,
+and I is set to 1 to show that one person is infected at the start. Time
+span for the simulation was set to a year, since every outbreak in this
+simulation ends within the period.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{def} \PY{n+nf}{update\PYZus{}func}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{time}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Update the SEIR model}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    state: starting variables of SEIR}
+         \PY{l+s+sd}{    t: time step}
+         \PY{l+s+sd}{    system: includes alpha,beta,gamma,omega rates}
+         \PY{l+s+sd}{    contact: current contact number for the state}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+             
+             \PY{n}{s}\PY{p}{,}\PY{n}{e}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{n}{r} \PY{o}{=} \PY{n}{state}
+                     
+             \PY{c+c1}{\PYZsh{}current population}
+             \PY{n}{total\PYZus{}pop} \PY{o}{=} \PY{n}{s}\PY{o}{+}\PY{n}{e}\PY{o}{+}\PY{n}{i}\PY{o}{+}\PY{n}{r}
+             
+             \PY{c+c1}{\PYZsh{}change rate for each status}
+             \PY{n}{ds} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{beta}\PY{o}{*}\PY{n}{s}\PY{o}{*}\PY{n}{i}\PY{p}{)}\PY{o}{/}\PY{n}{total\PYZus{}pop} \PY{c+c1}{\PYZsh{}change in number of people susceptible}
+             \PY{n}{de} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{beta}\PY{o}{*}\PY{n}{s}\PY{o}{*}\PY{n}{i}\PY{p}{)}\PY{o}{/}\PY{n}{total\PYZus{}pop}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{sigma}\PY{o}{*}\PY{n}{e} \PY{c+c1}{\PYZsh{}change in number of people moving to exposed period}
+             \PY{n}{di} \PY{o}{=} \PY{n}{sigma}\PY{o}{*}\PY{n}{e} \PY{o}{\PYZhy{}} \PY{n}{gamma}\PY{o}{*}\PY{n}{i}     \PY{c+c1}{\PYZsh{}change in people moving to infectious period}
+             \PY{n}{dr} \PY{o}{=} \PY{n}{gamma}\PY{o}{*}\PY{n}{i}     \PY{c+c1}{\PYZsh{}change in people recovered}
+         
+             \PY{n}{s} \PY{o}{+}\PY{o}{=} \PY{n}{ds}      \PY{c+c1}{\PYZsh{}number of people susceptible}
+             \PY{n}{e} \PY{o}{+}\PY{o}{=} \PY{n}{de}      \PY{c+c1}{\PYZsh{}number of people exposed}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{n}{di}      \PY{c+c1}{\PYZsh{}number of people infected}
+             \PY{n}{r} \PY{o}{+}\PY{o}{=} \PY{n}{dr}      \PY{c+c1}{\PYZsh{}number of people recovered}
+             
+             \PY{k}{return} \PY{n}{State}\PY{p}{(}\PY{n}{S}\PY{o}{=}\PY{n}{s}\PY{p}{,} \PY{n}{E}\PY{o}{=}\PY{n}{e}\PY{p}{,} \PY{n}{I}\PY{o}{=}\PY{n}{i}\PY{p}{,} \PY{n}{R}\PY{o}{=}\PY{n}{r}\PY{p}{)}
+\end{Verbatim}
+
+
+    update\_func function updates the state with four different differential
+equations. System object was unpacked at the beginning of the code to
+make it easy to read. Change in susceptible group is affected only by
+the number of people in infected group, which will raise the number of
+people in exposed group. There is no direct transition from susceptible
+group to the infected group, because measles have average of 11 days
+incubation period, where the person does not spread the disease during
+that period. Therefore, about 1/11 (sigma value) of people in the
+exposed group move to the infected group every day, showing that their
+incubatoin period has ended. It takes about 7 days in average for people
+to get recoverd, so 1/7 (gamma) of people infected is recovered every
+day.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Runs a simulation of the system.}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    system: System object}
+         \PY{l+s+sd}{    update\PYZus{}func: function that updates state}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    returns: TimeFrame}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}creates timeframe to save daily states}
+             \PY{n}{frame} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{init}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+             \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t0}\PY{p}{]} \PY{o}{=} \PY{n}{init}
+             
+             \PY{k}{for} \PY{n}{time} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{t0}\PY{p}{,} \PY{n}{t\PYZus{}end}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{time}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{update\PYZus{}func}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{time}\PY{p}{]}\PY{p}{,} \PY{n}{time}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{frame}
+\end{Verbatim}
+
+
+    run\_simulation function takes a system object with a update\_func
+function, and simulates the state for the duration of the time span set
+at the make\_system function. It returns a TimeFrame object with all the
+state values for each time step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}results} \PY{p}{(}\PY{n}{S}\PY{p}{,}\PY{n}{E}\PY{p}{,}\PY{n}{I}\PY{p}{,}\PY{n}{R}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{plot}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Susceptible}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{E}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Exposed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Infected}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{R}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recovered}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (days)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fraction of population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    A plotting function was made for convenience.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{init\PYZus{}im} \PY{o}{=} \PY{l+m+mf}{0.907}
+         \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{init\PYZus{}im}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+         \PY{n}{results} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    The code was tested with 2017 average immunization rate for the U.S
+(90.7\%), testing out what will happen if a measles infected person is
+introduced to a community of 1000 people in a real world situation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{S}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{E}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{I}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{R}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{title} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The result shows that even though measles is a highly contagious
+disease, the measles outbreak ends without infecting number of people
+due high immunity rate. We call this herd immunity, because immunized
+people acts as a barrier that prevents disease to spread among the
+susceptible people. For each disease, there is specific percentage of
+people needed to create a herd immunity. Lowering the immunity rate will
+show abrupt change in infected people, once the herd immunity stops
+working.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{init\PYZus{}im2} \PY{o}{=} \PY{l+m+mf}{0.3}
+         \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{init\PYZus{}im2}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+         \PY{n}{results2} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{)}
+         \PY{n}{results2}\PY{p}{;}
+\end{Verbatim}
+
+
+    Next, the code was tested with lowered initial immunity rate of 30\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{results2}\PY{o}{.}\PY{n}{S}\PY{p}{,} \PY{n}{results2}\PY{o}{.}\PY{n}{E}\PY{p}{,} \PY{n}{results2}\PY{o}{.}\PY{n}{I}\PY{p}{,} \PY{n}{results2}\PY{o}{.}\PY{n}{R}\PY{p}{)}
+         \PY{n}{decorate} \PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The result is a lot different from the one above, showing that most of
+susceptible people become infected before the outbreak ends. This shows
+that the community with only 30\% immunity rate has lost their herd
+immunity, because the number of immuned (recovered) people is too small
+to act as a barrier that protects the susceptible people. Seeing the
+result, we can assume that there must be a point between immunity rate
+of 30\% to 90\% where the herd immunity fails to function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{k}{def} \PY{n+nf}{calc\PYZus{}highest\PYZus{}infected}\PY{p}{(}\PY{n}{results}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Fraction of population infected during the simulation.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    results: DataFrame with columns S, E, I, R}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    returns: fraction of population}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{I}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{sweep\PYZus{}init\PYZus{}im}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sweep a range of values for beta.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    beta\PYZus{}array: array of beta values}
+         \PY{l+s+sd}{    gamma: recovery rate}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    returns: SweepSeries that maps from beta to total infected}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{sweep} \PY{o}{=} \PY{n}{SweepSeries}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{init\PYZus{}im} \PY{o+ow}{in} \PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{:}
+                 \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{init\PYZus{}im}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+                 \PY{n}{results} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{)}
+                 \PY{n}{sweep}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{init\PYZus{}im}\PY{p}{]} \PY{o}{=} \PY{n}{calc\PYZus{}highest\PYZus{}infected}\PY{p}{(}\PY{n}{results}\PY{p}{)}\PY{o}{*}\PY{n}{pop}
+             \PY{k}{return} \PY{n}{sweep}
+\end{Verbatim}
+
+
+    To carefully check out the impact due to the change of initial immunity
+for the community, a sweep\_init\_im function was created. The function
+checks out the highest number of people infected to the disease during
+the simulation. Since the number of people being infected at a day is
+proportional to the number of currently infected people, higher numbers
+means that the disease is spreading faster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{imun\PYZus{}rate\PYZus{}array} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}
+         \PY{n}{sweep} \PY{o}{=} \PY{n}{sweep\PYZus{}init\PYZus{}im}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)} 
+         \PY{n}{sweep}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} 0.00    208.313630
+         0.05    193.245208
+         0.10    177.918762
+         0.15    162.651083
+         0.20    147.602195
+         0.25    132.761627
+         0.30    117.985077
+         0.35    103.523808
+         0.40     89.378869
+         0.45     75.521163
+         0.50     62.132854
+         0.55     49.290309
+         0.60     37.160085
+         0.65     25.952817
+         0.70     15.994027
+         0.75      7.777191
+         0.80      2.115958
+         0.85      1.000000
+         0.90      1.000000
+         0.95      1.000000
+         1.00      0.999000
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sweep}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Immunity Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Highest number of people infected during 1 outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Looking at the table and the plot, we can examine that the speed of
+infection decreases almost linearly until the immunity rate reachs 80\%.
+Actually, the table states that the maximum number of people infected
+after the initial immunization rate of 85\% is 1, meaning that no one
+except for the initially infected person was infected during the
+outbreak. We guessed that the herd immunity for measles in this
+simulation must be around 80\textasciitilde{}85\% range.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{def} \PY{n+nf}{calc\PYZus{}fraction\PYZus{}infected}\PY{p}{(}\PY{n}{results}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Fraction of susceptible population infected during the simulation.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    results: DataFrame with columns S, E, I, R}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    returns: fraction of susceptible group population}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{k}{return} \PY{p}{(}\PY{n}{get\PYZus{}first\PYZus{}value}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{S}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{get\PYZus{}last\PYZus{}value}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{S}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{get\PYZus{}first\PYZus{}value}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{S}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k}{def} \PY{n+nf}{sweep\PYZus{}init\PYZus{}im2}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sweep a range of values for beta.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    beta\PYZus{}array: array of beta values}
+         \PY{l+s+sd}{    gamma: recovery rate}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    returns: SweepSeries that maps from beta to total infected}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{sweep} \PY{o}{=} \PY{n}{SweepSeries}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{init\PYZus{}im} \PY{o+ow}{in} \PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{:}
+                 \PY{n}{system} \PY{o}{=} \PY{n}{make\PYZus{}system}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{init\PYZus{}im}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{gamma}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+                 \PY{n}{results} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{update\PYZus{}func}\PY{p}{)}
+                 \PY{n}{sweep}\PY{p}{[}\PY{n}{system}\PY{o}{.}\PY{n}{init\PYZus{}im}\PY{p}{]} \PY{o}{=} \PY{n}{calc\PYZus{}fraction\PYZus{}infected}\PY{p}{(}\PY{n}{results}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100} 
+             \PY{k}{return} \PY{n}{sweep}
+\end{Verbatim}
+
+
+    To do a deeper analysis, another sweep\_init\_im function was created to
+check out the percentage of people in the susceptible group infected
+during the outbreak. It will give us more clear view toward the herd
+immunity for measles and hopefully reveal the danger of lowering
+immunity rate for a community.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{imun\PYZus{}rate\PYZus{}array} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.99}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{)}
+         \PY{n}{sweep2} \PY{o}{=} \PY{n}{sweep\PYZus{}init\PYZus{}im2}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)} 
+         \PY{n}{sweep2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} 0.00    99.880178
+         0.03    99.851143
+         0.06    99.813900
+         0.09    99.767596
+         0.12    99.710066
+         0.15    99.638624
+         0.18    99.549939
+         0.21    99.439865
+         0.24    99.303238
+         0.27    99.133598
+         0.30    98.922845
+         0.33    98.660774
+         0.36    98.334471
+         0.39    97.927495
+         0.42    97.418780
+         0.45    96.781122
+         0.48    95.979083
+         0.51    94.966023
+         0.54    93.679834
+         0.57    92.036695
+         0.60    89.921705
+         0.63    87.174520
+         0.66    83.566653
+         0.69    78.764043
+         0.72    72.258928
+         0.75    63.203631
+         0.78    49.789004
+         0.81    28.661237
+         0.84     9.100615
+         0.87     3.086305
+         0.90     1.642769
+         0.93     1.105863
+         0.96     0.831930
+         0.99     0.666378
+         dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sweep2}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Immunity Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f susceptible people getting measles during an outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Until the immunity rate reaches 60\%, more than 90\% of people in the
+susceptible group is infected by the measles. However, the percentage
+drops abruptly after that, hitting less than 10\% on immunity rate of
+84\%. This graph clearly shows the importance of herd immunity, and the
+threat people can face due to the lowering of the immunity rate.
+
+    \hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+This model uses SEIR methodology to examine how measels would spread
+throughout a community of 1000 individuals with varying immunity rates.
+Figure 1 depicts an SEIR representation based on a 90.7\% measles
+immunity rate, equivalent to that of the immunity rate in the United
+States. Due to the high immunity rate, susceptible people are protected
+by the herd immunity, and the number of individuals in each of the
+categories, susceptible, recovered, and infected remains constant
+throughout the simulated outbreak.
+
+Figure 2 represents an example of the SEIR model with an immunity rate
+of 30\%. In this model, we can see that as the number of susceptible
+individuals decreases, the number of recovered individuals increases at
+an equal and opposite rate. The entire population get infected and later
+recovered from this measles outbreak within 150 days of the start.
+
+Figure 3 depicts the predicted outcome of this model that as the
+immunity rate in a community increases, rate of infection decreases,
+thus the number of people infected during an outbreak will decrease. We
+see the number of infected individuals plateau around
+80\%\textasciitilde{}85\% immunity.
+
+Figure 4 depicts the percent of susceptible individuals that do contact
+measles during an outbreak. At low immunity rates (without herd
+immunity) a large percent of susceptible individuals do contact measles.
+As the immunity rate increases, this percentage decreases.
+
+    \hypertarget{interpretation}{%
+\subsection{Interpretation}\label{interpretation}}
+
+As expected, as the immunity rate in the community increased, the
+highest number of people infected with measles during an outbreak
+decreased. The number of people infected with measles begins to plateau
+between an 80 - 85\% immunity rate. From the data that Figure 4 is based
+on we can see that the ideal immunity rate for a community should be
+more than 80 - 85\%, because the herd immunity is lost at the lowered
+immunity rate. Between these 2 numbers, the percent of susceptible
+individuals that contract measles drops sharply from 36\% to 6\%.
+
+Our model does have several limitations: 1. We were unable to find an
+effective contact number or contact rate for measles within the United
+States. Having this number would have enabled us to calculate beta
+instead of just assuming it to be 0.9.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  The model gets to a point where less than 1 person is infected with
+  measles. This is physically impossible as you cannot have less than
+  one person. In our results, we interpreted less than 1 to mean the
+  individual did not have measles.
+\item
+  The outbreak usually happens country wide, not restricted into a
+  single community. Due to the fact that the simulation was done in a
+  close community, the results may vary in real world situation.
+\item
+  People who get measles are usually quarantined before they start
+  infecting other people. One special feature about measles is the rash,
+  which usuaully appears 14 days after exposure. In real world, people
+  get quarantined right away when they get the rash. In this simulation,
+  the factor was ignored. People can also get a MMR vaccination while
+  they are exposed, meaning that not every exposed people move to the
+  infected stage.
+\item
+  Measles spread differently among different age groups. Usually, it
+  spread easily among the younger children. The age factor was ignored
+  in this simulation due to its complexity.
+\end{enumerate}
+
+    \hypertarget{abstract}{%
+\subsection{Abstract}\label{abstract}}
+
+In this model, we were seeking to find out the result of lowering the
+measles immunity rate in a small community during a outbreak. As
+predicted, we found that as the immunity rate in a community is lowered,
+the number of infections in a community increases. We also found that
+when immunity is between 80-85\%, the number of individuals infected in
+a population begins to plateau. This finding indicated that the ideal
+immunity rate for a community of 1000 individuals is between 80-85\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sweep}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Immunity Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Highest number of people infected during 1 outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sweep2}\PY{p}{)}
+         \PY{n}{decorate}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Immunity Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ylabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s1}{f susceptible people getting measles during an outbreak}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Figure 4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
