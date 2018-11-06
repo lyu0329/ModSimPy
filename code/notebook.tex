@@ -141,7 +141,11 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
+<<<<<<< HEAD
     \title{Project2-v3}
+=======
+    \title{Untitled}
+>>>>>>> 54758c62596fd8945528c48ea4049d9c4dc7325b
     
     
     
@@ -280,6 +284,7 @@
     
 
     
+<<<<<<< HEAD
     \hypertarget{project-2-team-11}{%
 \section{PROJECT 2 : TEAM 11}\label{project-2-team-11}}
 
@@ -571,10 +576,192 @@ of 30\% to 90\% where the herd immunity fails to function.
          \PY{l+s+sd}{    returns: fraction of population}
          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
              \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{I}\PY{p}{)}
+=======
+    \hypertarget{project1---team-5-studio-1}{%
+\subsection{Project1 - Team 5, Studio
+1}\label{project1---team-5-studio-1}}
+
+Annie Chu, SeungU Lyu
+
+    What would the age demographics be in 15 years if the US implemented an
+one-child policy?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Configure Jupyter so figures appear in the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Configure Jupyter to display the assigned value after an assignment}
+        \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+        
+        \PY{c+c1}{\PYZsh{} import functions from the modsim.py module}
+        \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{pop\PYZus{}init\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/pop\PYZus{}2017\PYZus{}US.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}          male    female
+        age                    
+        4    10195968   9742892
+        9    10368141   9936097
+        14   10605072  10173382
+        19   10800491  10331169
+        24   11349142  10769493
+        29   11902230  11468230
+        34   11089131  10883081
+        39   10615985  10616012
+        44    9753115   9890258
+        49   10386175  10587683
+        54   10520182  10880912
+        59   10700520  11307436
+        64    9557283  10430419
+        69    7929868   8906513
+        74    5947272   6899793
+        79    3898816   4842445
+        84    2509059   3456231
+        89    2279669   4189013
+\end{Verbatim}
+            
+    Source:
+https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{death\PYZus{}rate\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/age\PYZus{}death\PYZus{}rate.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}          male    female
+        age                    
+        0    0.006392  0.005377
+        4    0.000280  0.000216
+        9    0.000132  0.000102
+        14   0.000169  0.000122
+        19   0.000666  0.000291
+        24   0.001299  0.000465
+        29   0.001505  0.000608
+        34   0.001709  0.000835
+        39   0.001985  0.001101
+        44   0.002540  0.001590
+        49   0.003755  0.002431
+        54   0.006087  0.003815
+        59   0.009169  0.005568
+        64   0.013212  0.007811
+        69   0.018118  0.011551
+        74   0.027325  0.018558
+        79   0.042571  0.030288
+        84   0.070514  0.052274
+        89   0.147958  0.130808
+\end{Verbatim}
+            
+    Source:
+https://www.statista.com/statistics/241488/population-of-the-us-by-sex-and-age/
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{child\PYZus{}ever\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/child\PYZus{}ever\PYZus{}born.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}      percentage
+         age            
+         19          5.1
+         24         28.6
+         29         50.6
+         34         71.8
+         39         82.8
+         44         84.9
+         49         83.2
+\end{Verbatim}
+            
+    Source: Fertility of Women in the United States: 2012, Lindsay M. Monte
+and Renee R. Ellis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{first\PYZus{}birth\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/first\PYZus{}birth\PYZus{}rate.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}      percentage
+        age            
+        15       0.0090
+        16       0.0182
+        17       0.0314
+        18       0.0470
+        19       0.0597
+        20       0.0661
+        21       0.0664
+        22       0.0650
+        23       0.0655
+        24       0.0680
+        25       0.0731
+        26       0.0798
+        27       0.0867
+        28       0.0930
+        29       0.0998
+        30       0.1067
+        31       0.1113
+        32       0.1109
+        33       0.1066
+        34       0.1009
+        35       0.0941
+        36       0.0825
+        37       0.0690
+        38       0.0541
+        39       0.0431
+        40       0.0312
+        41       0.0226
+        42       0.0141
+        43       0.0084
+        44       0.0048
+        45       0.0027
+        46       0.0013
+        47       0.0007
+        48       0.0007
+        49       0.0006
+\end{Verbatim}
+            
+    Source: https://www.cdc.gov/nchs/nvss/births.htm
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{male\PYZus{}pop} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{female\PYZus{}pop} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}male\PYZus{}death = linspace(0,0,90)}
+         \PY{c+c1}{\PYZsh{}female\PYZus{}death = linspace(0,0,90)}
+         
+         \PY{n}{ident} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{90}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{\PYZgt{}}\PY{n}{ident}\PY{p}{:}
+                 \PY{n}{ident} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{5}
+             \PY{n}{male\PYZus{}pop}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{pop\PYZus{}init\PYZus{}data}\PY{o}{.}\PY{n}{male}\PY{p}{[}\PY{n}{ident}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{n}{female\PYZus{}pop}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{pop\PYZus{}init\PYZus{}data}\PY{o}{.}\PY{n}{female}\PY{p}{[}\PY{n}{ident}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}male\PYZus{}death[i] = death\PYZus{}rate\PYZus{}data.male[ident]}
+             \PY{c+c1}{\PYZsh{}female\PYZus{}death[i] = death\PYZus{}rate\PYZus{}data.female[ident]}
+             
+         \PY{c+c1}{\PYZsh{}male\PYZus{}death[0] = death\PYZus{}rate\PYZus{}data.male[0]}
+         \PY{c+c1}{\PYZsh{}female\PYZus{}death[0] = death\PYZus{}rate\PYZus{}data.female[0]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}child\PYZus{}ever = linspace(0,0,50)}
+         \PY{c+c1}{\PYZsh{}ident = 19}
+         \PY{c+c1}{\PYZsh{}for i in range(15,50):}
+         \PY{c+c1}{\PYZsh{}    if i\PYZgt{}ident:}
+         \PY{c+c1}{\PYZsh{}        ident += 5}
+         \PY{c+c1}{\PYZsh{}    child\PYZus{}ever[i] = child\PYZus{}ever\PYZus{}data.percentage[ident]/100}
+>>>>>>> 54758c62596fd8945528c48ea4049d9c4dc7325b
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<<<<<<< HEAD
 {\color{incolor}In [{\color{incolor}51}]:} \PY{k}{def} \PY{n+nf}{sweep\PYZus{}init\PYZus{}im}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)}\PY{p}{:}
              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Sweep a range of values for beta.}
          \PY{l+s+sd}{    }
@@ -603,10 +790,22 @@ means that the disease is spreading faster.
 {\color{incolor}In [{\color{incolor}52}]:} \PY{n}{imun\PYZus{}rate\PYZus{}array} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}
          \PY{n}{sweep} \PY{o}{=} \PY{n}{sweep\PYZus{}init\PYZus{}im}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)} 
          \PY{n}{sweep}
+=======
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}child\PYZus{}ever}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{system} \PY{o}{=} \PY{n}{System}\PY{p}{(}\PY{n}{male\PYZus{}death} \PY{o}{=} \PY{n}{death\PYZus{}rate\PYZus{}data}\PY{o}{.}\PY{n}{male}\PY{p}{,}
+                        \PY{n}{female\PYZus{}death} \PY{o}{=} \PY{n}{death\PYZus{}rate\PYZus{}data}\PY{o}{.}\PY{n}{female}\PY{p}{,}
+                        \PY{n}{child\PYZus{}ever} \PY{o}{=} \PY{n}{child\PYZus{}ever\PYZus{}data}\PY{o}{.}\PY{n}{percentage}\PY{p}{,}
+                        \PY{n}{first\PYZus{}rate} \PY{o}{=} \PY{n}{first\PYZus{}birth\PYZus{}data}\PY{o}{.}\PY{n}{percentage}\PY{p}{)}
+>>>>>>> 54758c62596fd8945528c48ea4049d9c4dc7325b
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
+<<<<<<< HEAD
 {\color{outcolor}Out[{\color{outcolor}52}]:} 0.00    208.313630
          0.05    193.245208
          0.10    177.918762
@@ -693,10 +892,36 @@ immunity rate for a community.
 {\color{incolor}In [{\color{incolor}56}]:} \PY{n}{imun\PYZus{}rate\PYZus{}array} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.99}\PY{p}{,} \PY{l+m+mi}{34}\PY{p}{)}
          \PY{n}{sweep2} \PY{o}{=} \PY{n}{sweep\PYZus{}init\PYZus{}im2}\PY{p}{(}\PY{n}{imun\PYZus{}rate\PYZus{}array}\PY{p}{)} 
          \PY{n}{sweep2}
+=======
+{\color{outcolor}Out[{\color{outcolor}58}]:} male\_death      age
+         0     0.006392
+         4     0.000280
+         9     0.0001{\ldots}
+         female\_death    age
+         0     0.005377
+         4     0.000216
+         9     0.0001{\ldots}
+         child\_ever      age
+         19     5.1
+         24    28.6
+         29    50.6
+         34    71{\ldots}
+         first\_rate      age
+         15    0.0090
+         16    0.0182
+         17    0.0314
+         18 {\ldots}
+         dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{system}\PY{o}{.}\PY{n}{first\PYZus{}rate}\PY{p}{[}\PY{l+m+mi}{27}\PY{p}{]}
+>>>>>>> 54758c62596fd8945528c48ea4049d9c4dc7325b
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
+<<<<<<< HEAD
 {\color{outcolor}Out[{\color{outcolor}56}]:} 0.00    99.880178
          0.03    99.851143
          0.06    99.813900
@@ -862,6 +1087,42 @@ immunity rate for a community of 1000 individuals is between 80-85\%.
     \end{center}
     { \hspace*{\fill} \\}
     
+=======
+{\color{outcolor}Out[{\color{outcolor}59}]:} 0.0867
+\end{Verbatim}
+            
+    Methods Parameters: 1. Initial Population by age and gender group. 2.
+Death rate by age and gender group. 3. First birth rate for women by age
+group. 4. Probability of child birth gender (assume 50/50?) 5.
+Percentage of women with child ever born
+
+State: 1. Updated population by age and gender group 2. Time
+
+    Limitations:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Not accounting for twins
+\item
+  birth/death rate assuming constant for next 15 years
+\item
+  Assumption of gender birth ratio
+\item
+  No immigrants
+\item
+  Data not the most recent
+\end{enumerate}
+
+    Results 1. Compare with US Gov Data for projected future population
+number 2. Plot general population vs time (line graph) 3. Plot general
+populations (with subsections of age groups) vs time (bar graph)
+
+    To Do List 1. Determine age groups 2. Fork/copy github repo for project
+3. Adding data files to repo 4. Organizing variables/parameters/etc.
+
+>>>>>>> 54758c62596fd8945528c48ea4049d9c4dc7325b
 
     % Add a bibliography block to the postdoc
     
